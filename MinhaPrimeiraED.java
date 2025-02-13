@@ -36,8 +36,8 @@ public class MinhaPrimeiraED {
                 objetos[posicao] = objeto;
                 System.out.println("Posição válida, Registro cadastrado: " + objetos[posicao]);
             } else {
-                int tamanhoVetorAtual = objetos.length -1;
-                if (totalDeObjetos == tamanhoVetorAtual){
+                
+                if (cheio()){
                     System.out.println("Capacidade cheia. Redimensionando...");
                     mudarTamanhoVetor();
                 } 
@@ -56,8 +56,8 @@ public class MinhaPrimeiraED {
 
     public void adicionar(Object objeto) {
         try {
-            int tamanhoVetorAtual = objetos.length -1;
-            if (totalDeObjetos == tamanhoVetorAtual){
+            
+            if (cheio()){
                 System.out.println("Capacidade cheia. Redimensionando...");
                 mudarTamanhoVetor();
             } 
@@ -103,6 +103,14 @@ public class MinhaPrimeiraED {
 
     public Object getObjetos(int posicao) {
         return this.objetos[posicao];
+    }
+
+    public boolean cheio(){
+        int tamanhoVetorAtual = objetos.length -1;
+        return totalDeObjetos == tamanhoVetorAtual;
+    }
+    public boolean vazio(){
+        return totalDeObjetos == 0;
     }
 
     public static void main(String[] args) throws Exception {
@@ -163,5 +171,9 @@ public class MinhaPrimeiraED {
         // registro com a nova cap do vetor
         obj.adicionar(80);
         obj.listVetor();
+        System.out.println("\n");
+
+        //Verificar se o vetor é vazio
+        System.out.println("O vetor é vazio: " + obj.vazio());
     }
 }
