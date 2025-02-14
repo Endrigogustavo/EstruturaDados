@@ -32,7 +32,7 @@ public class MinhaPrimeiraED {
 
     public void adicionar(int posicao, Object objeto) {
         try {
-            if (!posicaoOcupado(posicao)) {
+            if (!posicaoOcupado(posicao) && posicaoValida(posicao)) {
                 objetos[posicao] = objeto;
                 System.out.println("Posição válida, Registro cadastrado: " + objetos[posicao]);
             } else {
