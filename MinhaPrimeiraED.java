@@ -36,11 +36,11 @@ public class MinhaPrimeiraED {
                 objetos[posicao] = objeto;
                 System.out.println("Posição válida, Registro cadastrado: " + objetos[posicao]);
             } else {
-                
-                if (cheio()){
+
+                if (cheio()) {
                     System.out.println("Capacidade cheia. Redimensionando...");
                     mudarTamanhoVetor();
-                } 
+                }
                 for (int i = totalDeObjetos; i > posicao; i--) {
                     objetos[i] = objetos[i - 1];
                 }
@@ -56,11 +56,10 @@ public class MinhaPrimeiraED {
 
     public void adicionar(Object objeto) {
         try {
-            
-            if (cheio()){
+            if (cheio()) {
                 System.out.println("Capacidade cheia. Redimensionando...");
                 mudarTamanhoVetor();
-            } 
+            }
 
             objetos[totalDeObjetos] = objeto;
             totalDeObjetos++;
@@ -81,12 +80,15 @@ public class MinhaPrimeiraED {
     }
 
     public void remove(int posicao) {
-        for (int i = posicao; i < totalDeObjetos - 1; i++) {
-            objetos[i] = objetos[i + 1];
+        if (posicaoValida(posicao)) {
+            for (int i = posicao; i < totalDeObjetos - 1; i++) {
+                objetos[i] = objetos[i + 1];
+            }
+            objetos[totalDeObjetos - 1] = null;
+            totalDeObjetos--;
+            System.out.println("indice removido com sucesso, novo indice: " + objetos[posicao]);
+
         }
-        objetos[totalDeObjetos - 1] = null;
-        totalDeObjetos--;
-        System.out.println("indice removido com sucesso, novo indice: " + objetos[posicao]);
     }
 
     public boolean contem(Object objeto) {
@@ -105,11 +107,12 @@ public class MinhaPrimeiraED {
         return this.objetos[posicao];
     }
 
-    public boolean cheio(){
-        int tamanhoVetorAtual = objetos.length -1;
+    public boolean cheio() {
+        int tamanhoVetorAtual = objetos.length - 1;
         return totalDeObjetos == tamanhoVetorAtual;
     }
-    public boolean vazio(){
+
+    public boolean vazio() {
         return totalDeObjetos == 0;
     }
 
@@ -173,7 +176,7 @@ public class MinhaPrimeiraED {
         obj.listVetor();
         System.out.println("\n");
 
-        //Verificar se o vetor é vazio
+        // Verificar se o vetor é vazio
         System.out.println("O vetor é vazio: " + obj.vazio());
     }
 }
