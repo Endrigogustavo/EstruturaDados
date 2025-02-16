@@ -47,8 +47,8 @@ public class MinhaPrimeiraED {
                 objetos[posicao] = objeto;
                 System.out.println(
                         "Registro adicionado com sucesso, registros movidos para a direita " + objetos[posicao]);
+                totalDeObjetos++;
             }
-            totalDeObjetos++;
         } catch (Exception e) {
             System.err.println("Erro ao criar novo registro: " + e.getMessage());
         }
