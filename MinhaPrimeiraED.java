@@ -35,6 +35,7 @@ public class MinhaPrimeiraED {
             if (!posicaoOcupado(posicao) && posicaoValida(posicao)) {
                 objetos[posicao] = objeto;
                 System.out.println("Posição válida, Registro cadastrado: " + objetos[posicao]);
+                totalDeObjetos++;
             } else {
 
                 if (cheio()) {
