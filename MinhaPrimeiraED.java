@@ -12,16 +12,15 @@ public class MinhaPrimeiraED {
     }
 
     private void mudarTamanhoVetor() {
-        System.out.println("Mudando tamanho do vetor");
         int vetorNovo = objetos.length * 2;
-        Object[] objetosNovo = new Object[vetorNovo];
-
-        for (int i = 0; i < objetos.length; i++) {
-            objetosNovo[i] = objetos[i];
-        }
-
-        objetos = objetosNovo;
-        System.out.println("Vetor com o dobro do tamanho");
+            Object[] objetosNovo = new Object[vetorNovo];
+    
+            // Copia os elementos do vetor original para o novo vetor
+            for (int i = 0; i < objetos.length; i++) {
+                objetosNovo[i] = objetos[i];
+            }
+            objetos = objetosNovo;
+            System.out.println("Vetor com o dobro do tamanho.");
     }
 
     public void listVetor() {
@@ -32,16 +31,14 @@ public class MinhaPrimeiraED {
 
     public void adicionar(int posicao, Object objeto) {
         try {
+            if (cheio()) {
+                System.out.println("Capacidade cheia. Redimensionando...");
+            }
             if (!posicaoOcupado(posicao) && posicaoValida(posicao)) {
                 objetos[posicao] = objeto;
                 System.out.println("Posição válida, Registro cadastrado: " + objetos[posicao]);
                 totalDeObjetos++;
             } else {
-
-                if (cheio()) {
-                    System.out.println("Capacidade cheia. Redimensionando...");
-                    mudarTamanhoVetor();
-                }
                 for (int i = totalDeObjetos; i > posicao; i--) {
                     objetos[i] = objetos[i - 1];
                 }
@@ -57,14 +54,13 @@ public class MinhaPrimeiraED {
 
     public void adicionar(Object objeto) {
         try {
-            if (cheio()) {
-                System.out.println("Capacidade cheia. Redimensionando...");
-                mudarTamanhoVetor();
+            if(totalDeObjetos != objetos.length){
+                objetos[totalDeObjetos] = objeto;
+                totalDeObjetos++;
+                System.out.println("Registro adicionado com sucesso");
+            }else{
+                System.out.println("Vetor cheio, erro ao add");
             }
-
-            objetos[totalDeObjetos] = objeto;
-            totalDeObjetos++;
-            System.out.println("Registro adicionado com sucesso");
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -109,9 +105,13 @@ public class MinhaPrimeiraED {
     }
 
     public boolean cheio() {
-        int tamanhoVetorAtual = objetos.length - 1;
-        return totalDeObjetos == tamanhoVetorAtual;
+        if (totalDeObjetos == objetos.length) {
+            mudarTamanhoVetor();
+            return true;
+        }
+        return false;
     }
+    
 
     public boolean vazio() {
         return totalDeObjetos == 0;
@@ -153,7 +153,7 @@ public class MinhaPrimeiraED {
         System.out.println("\n");
 
         // Resposta prevista: indice removido com sucesso, novo indice: Objeto
-        obj.remove(1);
+        obj.remove(0);
         obj.listVetor();
         System.out.println("\n");
 
@@ -172,8 +172,8 @@ public class MinhaPrimeiraED {
         obj.adicionar(5);
         obj.adicionar(6);
         obj.adicionar(7);
+        obj.adicionar(1,70);
         // registro com a nova cap do vetor
-        obj.adicionar(80);
         obj.listVetor();
         System.out.println("\n");
 
