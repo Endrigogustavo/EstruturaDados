@@ -3,10 +3,12 @@ public class MinhaSegundaED {
     int totalNomes = 0;
 
     public void adicionar(String nome) {
-        char primeiraLetra = nome.charAt(0);
-        int posicao = getIndice(primeiraLetra);
+        int posicao = getIndice(nome);
+        if(posicao == -1) System.out.println("Posição invalida");
+        if(nomes[posicao] == nome) System.out.println("Nome já registrado");
+        
         if(posicaoOcupada(posicao)){
-            System.out.println("Letra já cadastrada");
+            System.out.println("Registro invalido, tente novamente");
         }else{
             nomes[posicao] = nome;
             totalNomes++;
@@ -14,62 +16,36 @@ public class MinhaSegundaED {
 
     }
 
-    public int getIndice(char nome) {
-        switch (nome) {
-            case 'A':
-                return 0;
-            case 'B':
-                return 1;
-            case 'C':
-                return 2;
-            case 'D':
-                return 3;
-            case 'E':
-                return 4;
-            case 'F':
-                return 5;
-            case 'G':
-                return 6;
-            case 'H':
-                return 7;
-            case 'I':
-                return 8;
-            case 'J':
-                return 9;
-            case 'K':
-                return 10;
-            case 'L':
-                return 11;
-            case 'M':
-                return 12;
-            case 'N':
-                return 13;
-            case 'O':
-                return 14;
-            case 'P':
-                return 15;
-            case 'Q':
-                return 16;
-            case 'R':
-                return 17;
-            case 'S':
-                return 18;
-            case 'T':
-                return 19;
-            case 'U':
-                return 20;
-            case 'V':
-                return 21;
-            case 'W':
-                return 22;
-            case 'X':
-                return 23;
-            case 'Y':
-                return 24;
-            case 'Z':
-                return 25;
-            default:
-                return -1;
+    public int getIndice(String nome) {
+        char primeiraLetra = nome.charAt(0);
+        switch (primeiraLetra) {
+            case 'A': return 0;
+            case 'B': return 1;
+            case 'C': return 2;
+            case 'D': return 3;
+            case 'E': return 4;
+            case 'F': return 5;
+            case 'G': return 6;
+            case 'H': return 7;
+            case 'I': return 8;
+            case 'J': return 9;
+            case 'K': return 10;
+            case 'L': return 11;
+            case 'M': return 12;
+            case 'N': return 13;
+            case 'O': return 14;
+            case 'P': return 15;
+            case 'Q': return 16;
+            case 'R': return 17;
+            case 'S': return 18;
+            case 'T': return 19;
+            case 'U': return 20;
+            case 'V': return 21;
+            case 'W': return 22;
+            case 'X': return 23;
+            case 'Y': return 24;
+            case 'Z': return 25;
+            default: return -1;
 
         }
     }
@@ -78,13 +54,8 @@ public class MinhaSegundaED {
         return nomes[posicao] != null;
     }
 
-    private boolean posicaoValida(int posicao){
-        return posicao >= 0 && posicao <= totalNomes;
-    }
-
     public void remove(String nome){
-        char primeiraLetra = nome.charAt(0);
-        int indice = getIndice(primeiraLetra);
+        int indice = getIndice(nome);
         nomes[indice] = null;
         totalNomes--;
     }
@@ -103,8 +74,6 @@ public class MinhaSegundaED {
     public int totalNomes(){
         return this.totalNomes;
     }
-
-
 
     public void listVetor() {
         for (int i = 0; i <= nomes.length - 1; i++) {
@@ -128,7 +97,6 @@ public class MinhaSegundaED {
         System.out.println("\n");
         System.out.println(nome.posicaoOcupada(1));
         System.out.println("\n");
-        System.out.println(nome.posicaoValida(1));
         System.out.println("\n");
         System.out.println(nome.totalNomes());
     }
