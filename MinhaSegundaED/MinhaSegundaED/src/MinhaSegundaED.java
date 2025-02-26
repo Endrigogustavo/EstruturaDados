@@ -3,91 +3,82 @@ public class MinhaSegundaED {
     int totalNomes = 0;
 
     public void adicionar(String nome) {
+        if (!validarNome(nome)) {
+            System.out.println("Nome inválido. Certifique-se de que ele contém apenas letras e não está vazio.");
+            return;
+        }
+
         int posicao = getIndice(nome);
-        if(posicao == -1) System.out.println("Posição invalida");
-        if(nomes[posicao] == nome) System.out.println("Nome já registrado");
-        
-        if(posicaoOcupada(posicao)){
-            System.out.println("Registro invalido, tente novamente");
-        }else{
+        if (posicao == -1) {
+            System.out.println("Posição inválida");
+            return;
+        }
+
+        if (nomes[posicao] != null && nomes[posicao].equals(nome)) {
+            System.out.println("Nome já registrado");
+            return;
+        }
+
+        if (posicaoOcupada(posicao)) {
+            System.out.println("Registro inválido, tente novamente");
+        } else {
             nomes[posicao] = nome;
             totalNomes++;
         }
+    }
 
+    public boolean validarNome(String nome) {
+        return nome != null && !nome.isEmpty() && nome.matches("[A-Za-z]+");
     }
 
     public int getIndice(String nome) {
-        char primeiraLetra = nome.charAt(0);
-        switch (primeiraLetra) {
-            case 'A': return 0;
-            case 'B': return 1;
-            case 'C': return 2;
-            case 'D': return 3;
-            case 'E': return 4;
-            case 'F': return 5;
-            case 'G': return 6;
-            case 'H': return 7;
-            case 'I': return 8;
-            case 'J': return 9;
-            case 'K': return 10;
-            case 'L': return 11;
-            case 'M': return 12;
-            case 'N': return 13;
-            case 'O': return 14;
-            case 'P': return 15;
-            case 'Q': return 16;
-            case 'R': return 17;
-            case 'S': return 18;
-            case 'T': return 19;
-            case 'U': return 20;
-            case 'V': return 21;
-            case 'W': return 22;
-            case 'X': return 23;
-            case 'Y': return 24;
-            case 'Z': return 25;
-            default: return -1;
-
+        char primeiraLetra = Character.toUpperCase(nome.charAt(0));
+        if (primeiraLetra >= 'A' && primeiraLetra <= 'Z') {
+            return primeiraLetra - 'A';
         }
+        return -1;
     }
 
-    private boolean posicaoOcupada(int posicao){
+    private boolean posicaoOcupada(int posicao) {
         return nomes[posicao] != null;
     }
 
-    public void remove(String nome){
+    public void remove(String nome) {
         int indice = getIndice(nome);
-        nomes[indice] = null;
-        totalNomes--;
+        if (indice != -1 && nomes[indice] != null) {
+            nomes[indice] = null;
+            totalNomes--;
+        }
     }
 
-    public boolean contem(String nome){
-        for (int i = 0; i < nomes.length; i++) {
-            if (nomes[i] == nome) return true;
-          }
-          return false;
+    public boolean contem(String nome) {
+        for (String nomeArmazenado : nomes) {
+            if (nome.equals(nomeArmazenado)) return true;
+        }
+        return false;
     }
 
-    public String getNome(int posicao){
+    public String getNome(int posicao) {
         return this.nomes[posicao];
     }
-  
-    public int totalNomes(){
+
+    public int totalNomes() {
         return this.totalNomes;
     }
 
     public void listVetor() {
-        for (int i = 0; i <= nomes.length - 1; i++) {
+        for (int i = 0; i < nomes.length; i++) {
             System.out.println("Posição " + i + ": " + nomes[i]);
         }
     }
 
     public static void main(String[] args) {
         MinhaSegundaED nome = new MinhaSegundaED();
-        
+
         nome.adicionar("Beatriz");
         nome.listVetor();
         System.out.println("\n");
-        nome.adicionar("Beta");
+        nome.adicionar("beta");
         System.out.println("\n");
         nome.remove("Beatriz");
         nome.listVetor();
@@ -99,5 +90,9 @@ public class MinhaSegundaED {
         System.out.println("\n");
         System.out.println("\n");
         System.out.println(nome.totalNomes());
+
+        nome.adicionar("");  
+        nome.adicionar("1234");  
+        nome.adicionar("Ana-Maria");  
     }
 }
