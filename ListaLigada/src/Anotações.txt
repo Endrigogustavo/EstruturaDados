@@ -1,0 +1,39 @@
+A classe Celula.java vai ser responsavel pela listagem de itens, com os atributos "Proximo" e "Valor"
+cada valor tem null, ou um valor "proximo" dentro dele, e ele só ira parar quando o atributo proximo for null,
+declarando o fim da lista
+Ex: 
+{
+    "Id": 1,
+    "Name": "Endrigo",
+    "Proximo" :{
+        "Id": 2,
+        "Name": "Nickolas",
+        "Proximo" :{
+            "Id": 3,
+            "Name": "Ventieri",
+            "Proximo" :{
+                "Id": 4,
+                "Name": "Alex",
+                "Proximo": null,
+            }
+        }
+    }
+}
+
+existe a possibilidade de fazer essa lista com base em espaço de memória
+Ex:
+[0x123] Celula { Pessoa.getId: 1, proxima: 0x456 }
+[0x456] Celula { Pessoa.getId: 2, proxima: 0x789 }
+[0x789] Celula { Pessoa.getId: 3, proxima: null }
+
+para buscar o proximo indice, é só utilizar o metodo getProximo() fazendo a seguinte buscar
+
+Celula celula = new Celula()
+celula.getProximo()
+
+Lógica: id: 1 -> id: 2
+
+A classe de entidade Pessoa é responsavel por criar os objetos do tipo "pessoa", que será passado
+como atributo do "proximo" na classe Celula
+
+
