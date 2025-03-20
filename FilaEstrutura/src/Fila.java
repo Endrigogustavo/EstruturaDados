@@ -1,36 +1,39 @@
 public class Fila {
-    private Object vetor[];
-    private int inicio, fim;
+
+    private No inicio;
+    private No fim;
 
     public Fila(){
-        this.inicio = 0;
+        this.inicio = new No();
         this.fim = this.inicio;
+        this.inicio.proximo = null;
     }
 
     public void Enfileirar(Object item) throws Exception{
-        if((fim + 1) > vetor.length){
-            throw new Exception("A fila esta cheia");
-        }
-        vetor[fim] = item;
-        fim = fim + 1;
+        this.fim.proximo = new No();
+        this.fim = this.fim.proximo;
+        this.fim.item = item;
+        this.fim.proximo = null;
     }
 
-    public Object Desenfileirar() throws Exception{
+    public No Desenfileirar() throws Exception{
         if(vazio()){
             throw new Exception("A fila esta vazia");
         }
-        Object valor = vetor[inicio];
-        inicio = (inicio + 1) % vetor.length;
-        return valor;
+        inicio = inicio.getProximo();
+        return inicio.getProximo();
     }
 
     public boolean vazio(){
-        return (inicio == fim);
+        return (inicio.getProximo() == null);
     }
 
     public void imprime(){
-        for(int i = inicio; i != fim; i++){
-            System.out.println(vetor[i].toString() + " | ");
+        No auxiliar = inicio.proximo;
+
+        while (auxiliar != null) {
+            System.out.println(auxiliar.getItem());
+            auxiliar = auxiliar.getProximo();
         }
     }
 }
