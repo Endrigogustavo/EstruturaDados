@@ -9,6 +9,7 @@ public class App {
 
         System.out.println("\n");
         dequeList.EnqueueL(dequeList.DequeueL());
+        dequeList.DequeueR();
         dequeList.imprime();
     }
 }

@@ -41,8 +41,23 @@ public class Deque {
         return InicioItem;
     }
 
-    public Object DequeueR() throws Exception{
-        return null;
+    public Object DequeueR() throws Exception {
+        if (vazio()) {
+            throw new Exception("A fila está vazia");
+        }
+    
+        if (inicio.getProximo() == null) {
+            Object ultimoItem = inicio.item;
+            inicio = null;
+            return ultimoItem;
+        }
+        No atual = inicio;
+        while (atual.getProximo().getProximo() != null) {
+            atual = atual.getProximo();
+        }
+        Object ultimoItem = atual.getProximo().item;
+        atual.setProximo(null);
+        return ultimoItem;
     }
 
     public boolean vazio(){
