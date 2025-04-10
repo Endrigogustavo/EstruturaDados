@@ -5,37 +5,38 @@ public class Pilha {
     int topo = -1;
     int tamanho;
     int qtdeElementos;
-    char p[];
+    char firstPalindro[];
+    char secondPalindro[];
 
     public Pilha(int tamanho) {
-        p = new char[tamanho];
+        firstPalindro = new char[tamanho];
+        secondPalindro = new char[tamanho];
     }
 
     public void createArrayWithString(String palindromo){
         for(int i = 0; i < palindromo.length(); i++){
             push(palindromo.charAt(i));
         }
-        show(p);
+        show(firstPalindro);
         createReverseArrayWithString(palindromo);
     }
 
     public void createReverseArrayWithString(String palindromo){
-        char[] p2 = new char[palindromo.length()];
         int j =0;
         for(int i = palindromo.length() - 1; i >= 0; i--){             
-            p2[j] = p[i];
+            secondPalindro[j] = firstPalindro[i];
             j++; 
         }      
-        show(p2);
+        show(secondPalindro);
         System.out.println("\n");
-        compareArray(p, p2);
+        compareArray(firstPalindro, secondPalindro);
     }
 
-    public void compareArray(char[] p, char[] p2){
+    public void compareArray(char[] p, char[] secondPalindro){
         int j = p.length;
         boolean trueOrFalse = true;
         for (int i = 0; i < p.length; i++) {
-            if (p[i] == p2[i]){
+            if (p[i] == secondPalindro[i]){
                 trueOrFalse = true;
             }else{
                 trueOrFalse = false;
@@ -53,13 +54,12 @@ public class Pilha {
 
     public void push(char NewCharByString) {
         topo++;
-        p[topo] = NewCharByString;
+        firstPalindro[topo] = NewCharByString;
         qtdeElementos++;
-
     }
 
     public int pop() {
-        int x = p[topo];
+        int x = firstPalindro[topo];
         topo--;
         qtdeElementos--;
         return x;
