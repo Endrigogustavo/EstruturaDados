@@ -1,75 +1,59 @@
-
-
 public class Pilha {
 
     int topo = -1;
     int tamanho;
     int qtdeElementos;
-    char firstPalindro[];
-    char secondPalindro[];
+    char PalindroArray[];
+
+    int inicio = -1;
 
     public Pilha(int tamanho) {
-        firstPalindro = new char[tamanho];
-        secondPalindro = new char[tamanho];
+        this.tamanho = tamanho;
+        qtdeElementos = 0;
+        PalindroArray = new char[tamanho];
     }
 
     public void createArrayWithString(String palindromo){
         for(int i = 0; i < palindromo.length(); i++){
             push(palindromo.charAt(i));
         }
-        show(firstPalindro);
-        createReverseArrayWithString(palindromo);
     }
 
-    public void createReverseArrayWithString(String palindromo){
-        int j =0;
-        for(int i = palindromo.length() - 1; i >= 0; i--){             
-            secondPalindro[j] = firstPalindro[i];
-            j++; 
-        }      
-        show(secondPalindro);
-        System.out.println("\n");
-        compareArray(firstPalindro, secondPalindro);
+    public boolean isVoid(){
+        return qtdeElementos == 0;
     }
 
-    public void compareArray(char[] p, char[] secondPalindro){
-        int j = p.length;
-        boolean trueOrFalse = true;
-        for (int i = 0; i < p.length; i++) {
-            if (p[i] == secondPalindro[i]){
-                trueOrFalse = true;
-            }else{
-                trueOrFalse = false;
-                break;
+    public boolean isFull(){
+        return qtdeElementos == tamanho;
+    }
+
+    public void push(char e){
+        if(!isFull()){
+            if(inicio == -1){
+                inicio = 0;
             }
-            j--;
-        }
-
-        if(trueOrFalse == true){
-            System.out.println("É palindromo");
-        }else{
-            System.out.println("É diferente");
+            topo++;
+            PalindroArray[topo] = e;
+            qtdeElementos++;
         }
     }
 
-    public void push(char NewCharByString) {
-        topo++;
-        firstPalindro[topo] = NewCharByString;
-        qtdeElementos++;
+    public char pop(){
+        char ReturnCharValue = 0;
+        if(!isVoid()){
+            char ArrayValue = PalindroArray[topo];
+            topo--;
+            qtdeElementos--;
+            return ArrayValue;
+        }
+        return ReturnCharValue;
     }
 
-    public int pop() {
-        int x = firstPalindro[topo];
-        topo--;
-        qtdeElementos--;
-        return x;
-    }
 
-    public void show(char[] p) {
+    public void show() {
         String elementos = "";
         for (int i = topo; i >= 0; i--) {
-            elementos += "" + p[i];
-            
+            elementos += "" + PalindroArray[i];
         }
         System.out.println(elementos + " ");
     }
