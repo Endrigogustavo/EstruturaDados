@@ -1,8 +1,13 @@
+enum Estado {
+    LIVRE, OCUPADO, REMOVIDO
+}
+
 public class Hash {
-    public double item;
-    public boolean ocupado;
-    
-    public Hash(boolean b) { // construtor
-      ocupado = false;
+    double item;
+    Estado estado;
+
+    public Hash() {
+        estado = Estado.LIVRE;
     }
 }
+
